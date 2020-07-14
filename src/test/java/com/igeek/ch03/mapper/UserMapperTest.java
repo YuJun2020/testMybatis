@@ -77,4 +77,26 @@ public class UserMapperTest {
         //关闭资源
         sqlSession.close();
     }
+
+    @Test
+    public void deleteUser(){
+        //创建会话对象
+        SqlSession sqlSession = factory.openSession();
+        //获得代理对象
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        userMapper.deleteUser(1);
+        sqlSession.commit();
+        //关闭资源
+        sqlSession.close();
+    }
+
+    @Test public void updateUser() {
+        SqlSession sqlSesison = factory.openSession();
+        UserMapper userMapper = sqlSesison.getMapper(UserMapper.class);
+        User user = userMapper.findOne(29);
+        user.setUsername("李四");
+        userMapper.updateUser(user);
+        sqlSesison.commit();
+        sqlSesison.close();
+    }
 }
